@@ -1,18 +1,12 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        product = 1
-        zeros = 0
-        for num in nums:
-            if num==0:
-                zeros += 1
-                continue
-            product = product * num
-
-        if zeros >= 2:
-            answer = [0] * len(nums)
-        elif zeros == 1:
-            answer = [0]*len(nums)
-            answer[nums.index(0)] = product
-        else:
-            answer = [int(product/denom) for denom in nums]
+        answer = [1] * len(nums)
+        prefix = 1
+        postfix = 1
+        for i in range(len(nums)):
+            answer[i] = prefix
+            prefix = prefix * nums[i]
+        for j in range(len(nums)):
+            answer[len(nums)-j-1] = answer[len(nums)-j-1] * postfix
+            postfix = postfix * nums[len(nums)-j-1]
         return answer
