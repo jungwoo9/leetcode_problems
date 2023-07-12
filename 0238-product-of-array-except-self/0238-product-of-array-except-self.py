@@ -6,7 +6,7 @@ class Solution:
         for i in range(len(nums)):
             answer[i] = prefix
             prefix = prefix * nums[i]
-        for j in range(len(nums)):
-            answer[len(nums)-j-1] = answer[len(nums)-j-1] * postfix
-            postfix = postfix * nums[len(nums)-j-1]
+        for i in range(len(nums)-1, -1, -1):
+            answer[i] = answer[i] * postfix
+            postfix = postfix * nums[i]
         return answer
